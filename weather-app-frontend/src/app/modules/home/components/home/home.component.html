@@ -1,1 +1,54 @@
-<p>home works!</p>
+<div class="p-4">
+  <div class="today-highlight-container border-round-lg p-4 surface-card shadow-2">
+
+    <h2 class="text-2xl font-bold mb-4 text-primary">🌤️ Today’s Highlight</h2>
+
+    <div class="grid">
+      <!-- Left Side: Highlights -->
+      <div class="col-12 md:col-8">
+        <div class="grid">
+          <div class="col-12 md:col-4 mb-3">
+            <app-temperature-card></app-temperature-card>
+          </div>
+          <div class="col-12 md:col-4 mb-3">
+            <app-apparent-temperature></app-apparent-temperature>
+          </div>
+          <div class="col-12 md:col-4 mb-3">
+            <app-precipitation></app-precipitation>
+          </div>
+          <div class="col-12 md:col-4 mb-3">
+            <app-precipitation-probability></app-precipitation-probability>
+          </div>
+          <div class="col-12 md:col-4 mb-3">
+            <app-visibility></app-visibility>
+          </div>
+          <div class="col-12 md:col-4 mb-3">
+            <app-uv-index></app-uv-index>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Location + Graph -->
+      <div class="col-12 md:col-4">
+        <p-card class="mb-4 shadow-3 bg-primary text-white border-round-xl">
+          <div class="flex flex-column align-items-center text-center p-3">
+            <span class="text-sm text-white-alpha-70">Current Location</span>
+            <span class="text-2xl font-semibold mt-2">📍 București</span>
+          </div>
+        </p-card>
+
+        <br>
+
+        <p-card class="shadow-3 border-round-xl">
+          <div class="text-center p-3">
+            <span class="text-lg font-medium mb-2 block text-primary">📈 Temperature History</span>
+            <div style="height: 200px; background-color: #f0f4f8; border-radius: 0.5rem;">
+              <!-- future chart goes here -->
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+  </div>
+</div>
