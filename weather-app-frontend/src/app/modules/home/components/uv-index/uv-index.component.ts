@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherService} from "../../../../core/services/weather.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {WeatherService} from "../../../../core/services/weather-service/weather.service";
 import * as Constants from "../../../../core/utils/constants";
 import {map} from "rxjs";
 
@@ -9,13 +9,14 @@ import {map} from "rxjs";
   styleUrl: './uv-index.component.scss'
 })
 export class UvIndexComponent implements OnInit {
+  @Input() currentHour!: number;
   uvIndex?: number;
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
     this.weatherService.getUvIndex(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
-      map(res => res?.hourly?.uv_index?.[0])
+      map(res => res?.hourly?.uv_index?.[this.currentHour])
     ).subscribe(val => this.uvIndex = val);
   }
 }

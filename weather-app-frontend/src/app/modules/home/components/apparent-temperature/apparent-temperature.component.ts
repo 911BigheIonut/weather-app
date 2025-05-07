@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherService} from "../../../../core/services/weather.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {WeatherService} from "../../../../core/services/weather-service/weather.service";
 import * as Constants from "../../../../core/utils/constants";
 import {map} from "rxjs";
 
@@ -9,13 +9,18 @@ import {map} from "rxjs";
   styleUrl: './apparent-temperature.component.scss'
 })
 export class ApparentTemperatureComponent implements OnInit {
-  apparentTemperature?: number;
+  @Input() currentHour!: number;
+  apparentTemperatureCelsius?: number;
+  apparentTemperatureFarenheit?: number;
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.weatherService.getApparentTemperature(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
-      map(res => res?.hourly?.apparent_temperature?.[0])
-    ).subscribe(val => this.apparentTemperature = val);
+    this.weatherService.getApparentTemperatureCelsius(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
+      map(res => res?.hourly?.apparent_temperature?.[this.currentHour])
+    ).subscribe(val => this.apparentTemperatureCelsius = val);
+    this.weatherService.getApparentTemperatureFarenheit(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
+      map(res => res?.hourly?.apparent_temperature?.[this.currentHour])
+    ).subscribe(val => this.apparentTemperatureFarenheit = val);
   }
 }

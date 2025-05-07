@@ -10,6 +10,7 @@ import {UvIndexComponent} from "./components/uv-index/uv-index.component";
 import {ApparentTemperatureComponent} from "./components/apparent-temperature/apparent-temperature.component";
 import {VisibilityComponent} from "./components/visibility/visibility.component";
 import {CardModule} from "primeng/card";
+import {HistoricalDataComponent} from "./components/historical-data/historical-data.component";
 
 
 @NgModule({
@@ -20,11 +21,12 @@ import {CardModule} from "primeng/card";
     PrecipitationProbabilityComponent,
     UvIndexComponent,
     ApparentTemperatureComponent,
-    VisibilityComponent
+    VisibilityComponent,
+    HistoricalDataComponent
   ],
   imports: [
     CommonModule,
-    CardModule
+    CardModule,
   ],
   exports: [
     HomeComponent,
@@ -33,7 +35,8 @@ import {CardModule} from "primeng/card";
     PrecipitationProbabilityComponent,
     UvIndexComponent,
     ApparentTemperatureComponent,
-    VisibilityComponent
+    VisibilityComponent,
+    HistoricalDataComponent
   ]
 })
 export class HomeModule { }

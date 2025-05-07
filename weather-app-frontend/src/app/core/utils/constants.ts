@@ -3,9 +3,11 @@ export const LATITUDE = 'latitude'
 export const LONGITUDE = 'longitude'
 export const DEFAULT_LATITUDE = 44.43;
 export const DEFAULT_LONGITUDE = 26.15;
+export const TIMEZONE = 'timezone=auto';
 export const HOURLY_TEMPERATURE = 'hourly=temperature_2m';
 export const HOURLY_PRECIPITATION_PROBABILITY = 'hourly=precipitation_probability'
 export const HOURLY_PRECIPITATION = 'hourly=precipitation'
 export const HOURLY_VISIBILITY = 'hourly=visibility'
 export const HOURLY_UV_INDEX = 'hourly=uv_index'
 export const HOURLY_APPARENT_TEMPERATURE = 'hourly=apparent_temperature'
+export const UNIT_FARENHEIT = 'temperature_unit=fahrenheit'
