@@ -4,16 +4,24 @@
       <span class="material-icons text-orange-500">wb_sunny</span>
       <span class="text-xl label">Weather</span>
     </button>
-    <button class="sidebar-btn">
+
+    <button class="sidebar-btn" (click)="goHome()">
       <span class="material-icons text-orange-500">home</span>
       <span class="text-xl label">Home</span>
     </button>
   </div>
 
   <div class="bottom-button">
-    <button class="sidebar-btn">
-      <span class="material-icons text-gray-600">person</span>
-      <span class="text-xl label">Hello, User</span>
+    <button class="sidebar-btn" *ngIf="!auth.isLoggedIn(); else loggedIn" (click)="goToLogin()">
+      <span class="material-icons text-gray-600">login</span>
+      <span class="text-xl label">Login</span>
     </button>
+  
+    <ng-template #loggedIn>
+      <button class="sidebar-btn">
+        <span class="material-icons text-gray-600">person</span>
+        <span class="text-xl label">Hello, {{ auth.user }}</span>
+      </button>
+    </ng-template>
   </div>
-</div>
+  
