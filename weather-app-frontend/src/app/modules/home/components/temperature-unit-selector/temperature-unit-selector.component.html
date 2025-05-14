@@ -1,0 +1,19 @@
+<div class="flex align-items-center gap-4">
+  <p-radioButton
+    name="unit"
+    value="celsius"
+    [(ngModel)]="selectedUnit"
+    (onClick)="changeUnit()"
+    inputId="unit-celsius"
+    label="Celsius"
+  ></p-radioButton>
+
+  <p-radioButton
+    name="unit"
+    value="fahrenheit"
+    [(ngModel)]="selectedUnit"
+    (onClick)="changeUnit()"
+    inputId="unit-fahrenheit"
+    label="Fahrenheit"
+  ></p-radioButton>
+</div>

@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import * as Constants from '../../utils/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
+  private unit$ = new BehaviorSubject<'celsius' | 'fahrenheit'>('celsius');
   constructor(private http: HttpClient) {}
+
+  get selectedUnit$() {
+    return this.unit$.asObservable();
+  }
+
+  setUnit(unit: 'celsius' | 'fahrenheit') {
+    this.unit$.next(unit);
+  }
 
   public getTemperatureCelsius(lat: number, lon: number): Observable<any> {
     const url = `${Constants.API_BASE_URL}?${Constants.LATITUDE}=${lat}&${Constants.LONGITUDE}=${lon}&${Constants.HOURLY_TEMPERATURE}&${Constants.TIMEZONE}`;
@@ -47,16 +56,5 @@ export class WeatherService {
   public getApparentTemperatureFarenheit(lat: number, lon: number): Observable<any> {
     const url = `${Constants.API_BASE_URL}?${Constants.LATITUDE}=${lat}&${Constants.LONGITUDE}=${lon}&${Constants.HOURLY_APPARENT_TEMPERATURE}&${Constants.TIMEZONE}&${Constants.UNIT_FARENHEIT}`;
     return this.http.get(url);
-  }
-
-  getHistoricalTemperatureData(lat: number, lon: number): Observable<any> {
-    const params = {
-      latitude: lat.toString(),
-      longitude: lon.toString(),
-      hourly: 'temperature_2m',
-      timezone: 'auto',
-    };
-
-    return this.http.get(Constants.API_BASE_URL, { params });
   }
 }
