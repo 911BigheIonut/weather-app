@@ -22,11 +22,20 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      const username = this.loginForm.value.username;
-      this.router.navigate(['/']);
-    }
+  if (this.loginForm.valid) {
+    const { username, password } = this.loginForm.value;
+
+    this.auth.login(username, password).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        alert('Invalid username or password'); // or show error in UI
+      }
+    });
   }
+}
 
   goToRegister() {
     this.router.navigate(['/register']);

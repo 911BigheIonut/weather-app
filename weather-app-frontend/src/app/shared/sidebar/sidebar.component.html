@@ -1,4 +1,6 @@
-<div class="sidebar p-5 shadow-2 border-round-xl surface-card h-full flex flex-column justify-content-between">
+<div
+  class="sidebar p-5 shadow-2 border-round-xl surface-card h-full flex flex-column justify-content-between"
+>
   <div class="top-buttons flex flex-column gap-3">
     <button class="sidebar-btn">
       <span class="material-icons text-orange-500">wb_sunny</span>
@@ -12,16 +14,24 @@
   </div>
 
   <div class="bottom-button">
-    <button class="sidebar-btn" *ngIf="!auth.isLoggedIn(); else loggedIn" (click)="goToLogin()">
+    <button
+      class="sidebar-btn"
+      *ngIf="!auth.isLoggedIn(); else loggedIn"
+      (click)="goToLogin()"
+    >
       <span class="material-icons text-gray-600">login</span>
       <span class="text-xl label">Login</span>
     </button>
-  
+
     <ng-template #loggedIn>
-      <button class="sidebar-btn">
+      <div class="sidebar-btn">
         <span class="material-icons text-gray-600">person</span>
         <span class="text-xl label">Hello, {{ auth.user }}</span>
+      </div>
+      <button class="sidebar-btn" (click)="logout()">
+        <span class="material-icons text-gray-600">logout</span>
+        <span class="text-xl label">Logout?</span>
       </button>
     </ng-template>
   </div>
-  
+</div>

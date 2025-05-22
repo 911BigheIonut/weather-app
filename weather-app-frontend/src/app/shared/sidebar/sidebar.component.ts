@@ -20,4 +20,9 @@ export class SidebarComponent {
   goHome() {
     this.router.navigate(['/home']);
   }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }
