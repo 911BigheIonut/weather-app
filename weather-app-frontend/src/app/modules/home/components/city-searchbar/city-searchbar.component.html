@@ -1,0 +1,22 @@
+<div class="flex align-items-center gap-2 mb-3">
+  <i class="material-icons text-primary">location_on</i>
+  <p-autoComplete
+    [(ngModel)]="selectedCity"
+    [suggestions]="results"
+    (completeMethod)="onSearch($event)"
+    [optionLabel]="'label'"
+    (onSelect)="selectCity($event)"
+    placeholder="Search city"
+    [minLength]="2"
+    [dropdown]="true"
+    [forceSelection]="true"
+    class="w-full"
+  >
+    <ng-template let-city pTemplate="item">
+      <div class="flex flex-column">
+        <span class="font-medium">{{ city.name }}, {{ city.country }}</span>
+        <small class="text-sm text-gray-500">Lat: {{ city.latitude }}, Lon: {{ city.longitude }}</small>
+      </div>
+    </ng-template>
+  </p-autoComplete>
+</div>

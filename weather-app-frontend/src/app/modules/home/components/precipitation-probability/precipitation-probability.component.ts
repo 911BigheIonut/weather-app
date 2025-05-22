@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherService} from "../../../../core/services/weather.service";
-import * as Constants from "../../../../core/utils/constants";
+import {Component, Input, OnInit} from '@angular/core';
+import {WeatherService} from "../../../../core/services/weather-service/weather.service";
 import {map} from "rxjs";
+import {GeocodingService} from "../../../../core/services/geocoding-service/geocoding.service";
 
 @Component({
   selector: 'app-precipitation-probability',
@@ -9,13 +9,17 @@ import {map} from "rxjs";
   styleUrl: './precipitation-probability.component.scss'
 })
 export class PrecipitationProbabilityComponent implements OnInit {
+  @Input() currentHour!: number;
   probability?: number;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService,
+              private geocodingService: GeocodingService) {}
 
   ngOnInit(): void {
-    this.weatherService.getPrecipitationProbability(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
-      map(res => res.hourly.precipitation_probability[0])
-    ).subscribe(prob => this.probability = prob);
+    this.geocodingService.coordinates$.subscribe(({lat, lon}) => {
+      this.weatherService.getPrecipitationProbability(lat, lon).pipe(
+        map(res => res.hourly.precipitation_probability[this.currentHour])
+      ).subscribe(prob => this.probability = prob);
+    })
   }
 }

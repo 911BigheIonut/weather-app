@@ -10,6 +10,14 @@ import {UvIndexComponent} from "./components/uv-index/uv-index.component";
 import {ApparentTemperatureComponent} from "./components/apparent-temperature/apparent-temperature.component";
 import {VisibilityComponent} from "./components/visibility/visibility.component";
 import {CardModule} from "primeng/card";
+import {HistoricalDataComponent} from "./components/historical-data/historical-data.component";
+import {CitySearchbarComponent} from "./components/city-searchbar/city-searchbar.component";
+import {AutoCompleteModule} from "primeng/autocomplete";
+import {FormsModule} from "@angular/forms";
+import {
+  TemperatureUnitSelectorComponent
+} from "./components/temperature-unit-selector/temperature-unit-selector.component";
+import {RadioButtonModule} from "primeng/radiobutton";
 
 
 @NgModule({
@@ -20,11 +28,17 @@ import {CardModule} from "primeng/card";
     PrecipitationProbabilityComponent,
     UvIndexComponent,
     ApparentTemperatureComponent,
-    VisibilityComponent
+    VisibilityComponent,
+    HistoricalDataComponent,
+    CitySearchbarComponent,
+    TemperatureUnitSelectorComponent
   ],
   imports: [
     CommonModule,
-    CardModule
+    CardModule,
+    AutoCompleteModule,
+    FormsModule,
+    RadioButtonModule,
   ],
   exports: [
     HomeComponent,
@@ -33,7 +47,10 @@ import {CardModule} from "primeng/card";
     PrecipitationProbabilityComponent,
     UvIndexComponent,
     ApparentTemperatureComponent,
-    VisibilityComponent
+    VisibilityComponent,
+    HistoricalDataComponent,
+    CitySearchbarComponent,
+    TemperatureUnitSelectorComponent
   ]
 })
 export class HomeModule { }

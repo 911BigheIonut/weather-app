@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { WeatherService } from "../../../../core/services/weather.service";
+import {TimeService} from "../../../../core/services/time-service/time.service";
 
 @Component({
   selector: 'app-home',
@@ -7,28 +7,13 @@ import { WeatherService } from "../../../../core/services/weather.service";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  temperature: any;
-  precipitationProbability: any;
+  currentHour!: number;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private timeService: TimeService) {}
 
   ngOnInit() {
-    //test begin
-    const lat = 52.52;
-    const lon = 13.42;
-
-    this.weatherService.getTemperature(lat, lon).subscribe({
-      next: data => {
-        this.temperature = data.hourly.temperature_2m[15];
-      },
-      error: err => console.error('API error:', err)
+    this.timeService.currentHour$.subscribe(hour => {
+      this.currentHour = hour;
     });
-    this.weatherService.getPrecipitationProbability(lat, lon).subscribe({
-      next: data => {
-        this.precipitationProbability = data.hourly.precipitation_probability[0];
-      },
-      error: err => console.error('API error:', err)
-    });
-    //test end
   }
 }

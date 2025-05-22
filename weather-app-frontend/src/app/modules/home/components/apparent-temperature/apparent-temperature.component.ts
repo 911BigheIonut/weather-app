@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherService} from "../../../../core/services/weather.service";
-import * as Constants from "../../../../core/utils/constants";
-import {map} from "rxjs";
+import {Component, Input, OnInit} from '@angular/core';
+import {WeatherService} from "../../../../core/services/weather-service/weather.service";
+import {combineLatest, map} from "rxjs";
+import {GeocodingService} from "../../../../core/services/geocoding-service/geocoding.service";
 
 @Component({
   selector: 'app-apparent-temperature',
@@ -9,13 +9,28 @@ import {map} from "rxjs";
   styleUrl: './apparent-temperature.component.scss'
 })
 export class ApparentTemperatureComponent implements OnInit {
+  @Input() currentHour!: number;
   apparentTemperature?: number;
+  temperatureUnit: string = '°C';
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService,
+              private geocodingService: GeocodingService) {}
 
   ngOnInit(): void {
-    this.weatherService.getApparentTemperature(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE).pipe(
-      map(res => res?.hourly?.apparent_temperature?.[0])
-    ).subscribe(val => this.apparentTemperature = val);
+    combineLatest([
+      this.geocodingService.coordinates$,
+      this.weatherService.selectedUnit$
+    ]).subscribe(([{ lat, lon }, unit]) => {
+      const request$ = unit === 'celsius'
+        ? this.weatherService.getApparentTemperatureCelsius(lat, lon)
+        : this.weatherService.getApparentTemperatureFarenheit(lat, lon);
+
+      request$.pipe(
+        map(res => res?.hourly?.apparent_temperature?.[this.currentHour])
+      ).subscribe(temp => {
+        this.apparentTemperature = temp;
+        this.temperatureUnit = unit == 'celsius' ? '°C' : '°F';
+      });
+    });
   }
 }
