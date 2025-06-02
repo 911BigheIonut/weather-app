@@ -14,24 +14,12 @@
   </div>
 
   <div class="bottom-button">
-    <button
-      class="sidebar-btn"
-      *ngIf="!auth.isLoggedIn(); else loggedIn"
-      (click)="goToLogin()"
-    >
-      <span class="material-icons text-gray-600">login</span>
-      <span class="text-xl label">Login</span>
-    </button>
+  <button class="sidebar-btn" (click)="onUserButtonClick()">
+    <span class="material-icons text-gray-600">person</span>
+    <span class="text-xl label">
+      {{ auth.isLoggedIn() ? 'Hello, ' + auth.user : 'Login' }}
+    </span>
+  </button>
+</div>
 
-    <ng-template #loggedIn>
-      <div class="sidebar-btn">
-        <span class="material-icons text-gray-600">person</span>
-        <span class="text-xl label">Hello, {{ auth.user }}</span>
-      </div>
-      <button class="sidebar-btn" (click)="logout()">
-        <span class="material-icons text-gray-600">logout</span>
-        <span class="text-xl label">Logout?</span>
-      </button>
-    </ng-template>
-  </div>
 </div>

@@ -13,16 +13,15 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class SidebarComponent {
   constructor(public auth: AuthService, private router: Router) {}
 
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
-
   goHome() {
     this.router.navigate(['/home']);
   }
 
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+  onUserButtonClick() {
+    if (this.auth.isLoggedIn()) {
+      this.router.navigate(['/settings']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

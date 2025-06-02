@@ -34,4 +34,23 @@ router.post('/login', async (req, res) => {
   res.json({ token, user: { username: user.username } });
 });
 
+// Change Password
+router.post('/change-password', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user) return res.status(404).send({ error: 'User not found' });
+
+  user.password = password;
+  await user.save();
+  res.send({ success: true });
+});
+
+// Delete Account
+router.post('/delete', async (req, res) => {
+  const { username } = req.body;
+  await User.deleteOne({ username });
+  res.send({ success: true });
+});
+
+
 module.exports = router;
