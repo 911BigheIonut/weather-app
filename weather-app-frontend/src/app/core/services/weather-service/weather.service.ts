@@ -7,8 +7,13 @@ import * as Constants from '../../utils/constants';
   providedIn: 'root'
 })
 export class WeatherService {
-  private unit$ = new BehaviorSubject<'celsius' | 'fahrenheit'>('celsius');
+  private unit$ = new BehaviorSubject<'celsius' | 'fahrenheit'>(this.getInitialUnit());
   constructor(private http: HttpClient) {}
+
+  private getInitialUnit(): 'celsius' | 'fahrenheit' {
+    const stored = localStorage.getItem('tempUnit');
+    return stored === 'fahrenheit' ? 'fahrenheit' : 'celsius';
+  }
 
   get selectedUnit$() {
     return this.unit$.asObservable();
@@ -16,6 +21,7 @@ export class WeatherService {
 
   setUnit(unit: 'celsius' | 'fahrenheit') {
     this.unit$.next(unit);
+    localStorage.setItem('tempUnit', unit);
   }
 
   public getTemperatureCelsius(lat: number, lon: number): Observable<any> {

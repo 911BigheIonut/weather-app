@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<LoginResponse>('/api/auth/login', { username, password }).pipe(
       tap(res => {
         this._user = res.user.username;
-        localStorage.setItem('token', res.token); // optionally store the token
+        localStorage.setItem('token', res.token);
       })
     );
   }

@@ -11,6 +11,12 @@ export class TemperatureUnitSelectorComponent {
 
   constructor(private weatherService: WeatherService) {}
 
+  ngOnInit() {
+    this.weatherService.selectedUnit$.subscribe(unit => {
+      this.selectedUnit = unit;
+    });
+  }
+
   changeUnit() {
     this.weatherService.setUnit(this.selectedUnit);
   }
