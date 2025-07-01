@@ -1,0 +1,54 @@
+.favorites-slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+
+  .nav {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+}
+
+.favorites-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  flex-grow: 1;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+}
+
+.favorite-card {
+  min-width: 150px;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--surface-card);
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: var(--surface-hover);
+  }
+
+  .favorite-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

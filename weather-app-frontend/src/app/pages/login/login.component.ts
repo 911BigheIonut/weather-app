@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { FavoritesService } from 'src/app/core/services/favorites.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private favoritesService: FavoritesService
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -36,6 +38,7 @@ export class LoginComponent {
 
       this.auth.login(username, password).subscribe({
         next: () => {
+          this.favoritesService.loadFavorites(username);
           this.router.navigate(['/']);
         },
         error: (err) => {

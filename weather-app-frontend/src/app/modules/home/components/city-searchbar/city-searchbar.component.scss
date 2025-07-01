@@ -1,0 +1,25 @@
+.favorite-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .material-icons {
+    font-size: 24px;
+    color: var(--primary-color);
+    transition: color 0.2s;
+  }
+
+  &:hover {
+    background-color: var(--surface-hover);
+    
+    .material-icons {
+      color: var(--primary-dark-color);
+    }
+  }
+}

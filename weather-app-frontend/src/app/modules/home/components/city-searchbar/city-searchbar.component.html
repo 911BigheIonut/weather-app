@@ -1,5 +1,6 @@
-<div class="flex align-items-center gap-2 mb-3">
+<div class="flex align-items-center gap-3 mb-3">
   <i class="material-icons text-primary">location_on</i>
+
   <p-autoComplete
     [(ngModel)]="selectedCity"
     [suggestions]="results"
@@ -15,8 +16,20 @@
     <ng-template let-city pTemplate="item">
       <div class="flex flex-column">
         <span class="font-medium">{{ city.name }}, {{ city.country }}</span>
-        <small class="text-sm text-gray-500">Lat: {{ city.latitude }}, Lon: {{ city.longitude }}</small>
+        <small class="text-sm text-gray-500"
+          >Lat: {{ city.latitude }}, Lon: {{ city.longitude }}</small
+        >
       </div>
     </ng-template>
   </p-autoComplete>
+
+  <button
+    class="favorite-btn"
+    (click)="toggleFavorite()"
+    title="Add to favorites"
+  >
+    <span class="material-icons">star</span>
+  </button>
 </div>
+
+<app-favorites-slider></app-favorites-slider>

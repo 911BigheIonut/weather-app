@@ -18,6 +18,7 @@ import {
   TemperatureUnitSelectorComponent
 } from "./components/temperature-unit-selector/temperature-unit-selector.component";
 import {RadioButtonModule} from "primeng/radiobutton";
+import { FavoritesSliderComponent } from './components/favorites-slider/favorites-slider.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {RadioButtonModule} from "primeng/radiobutton";
     VisibilityComponent,
     HistoricalDataComponent,
     CitySearchbarComponent,
-    TemperatureUnitSelectorComponent
+    TemperatureUnitSelectorComponent,
+    FavoritesSliderComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import {RadioButtonModule} from "primeng/radiobutton";
     VisibilityComponent,
     HistoricalDataComponent,
     CitySearchbarComponent,
-    TemperatureUnitSelectorComponent
+    TemperatureUnitSelectorComponent,
+    FavoritesSliderComponent,
   ]
 })
 export class HomeModule { }

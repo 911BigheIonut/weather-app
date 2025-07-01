@@ -1,0 +1,30 @@
+<div class="favorites-slider-wrapper">
+  <button
+    class="nav left"
+    *ngIf="favorites.length > 0"
+    (click)="scrollLeft()"
+  >
+    ←
+  </button>
+
+  <div class="favorites-slider" #slider>
+    <div
+      *ngFor="let fav of favorites"
+      class="favorite-card"
+      (click)="selectFavorite(fav)"
+    >
+      <div class="favorite-content">
+        <strong>{{ fav.name }}</strong>
+        <span>{{ fav.country }}</span>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="nav right"
+    *ngIf="favorites.length > 0"
+    (click)="scrollRight()"
+  >
+    →
+  </button>
+</div>
