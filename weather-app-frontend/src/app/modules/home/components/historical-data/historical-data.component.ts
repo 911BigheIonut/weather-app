@@ -30,9 +30,10 @@ export class HistoricalDataComponent implements AfterViewInit {
         : this.weatherService.getTemperatureFarenheit(lat, lon);
 
       request$.subscribe((response: any) => {
-        const timeLabels = response.hourly.time.map((timestamp: string) =>
-          new Date(timestamp).toLocaleString()
-        );
+        const timeLabels = response.hourly.time.map((timestamp: string) => {
+          const date = new Date(timestamp);
+          return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:00`;
+        });
         const temperatures = response.hourly.temperature_2m;
 
         this.createChart(timeLabels, temperatures, unit);
@@ -58,15 +59,25 @@ export class HistoricalDataComponent implements AfterViewInit {
               data: temperatures,
               borderColor: 'rgba(0, 123, 255, 0.8)',
               fill: false,
-            },
+              tension: 0.3,
+            }
           ],
         },
         options: {
           responsive: true,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
           scales: {
             x: {
-              title: { display: true, text: 'Date & Time' },
-              ticks: { autoSkip: true, maxTicksLimit: 10 },
+              ticks: {
+                autoSkip: true,
+                maxRotation: 45,
+                minRotation: 30,
+                maxTicksLimit: 10,
+              },
             },
             y: {
               title: {
